@@ -39,7 +39,7 @@ export const api = {
       body: JSON.stringify({ senderId, recipientId, content, clientMessageId }),
     }),
 
-  // Returns all messages sent to userId after `since` (ISO string)
+
   getNewMessages: (userId, since) =>
     request(`/messages/new/${userId}?since=${encodeURIComponent(since)}`),
 

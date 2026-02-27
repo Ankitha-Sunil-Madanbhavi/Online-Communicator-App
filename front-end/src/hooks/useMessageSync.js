@@ -38,9 +38,6 @@ export function useMessageSync(currentUserId, onNewMessages) {
   const pollNewMessages = useCallback(async () => {
     if (!currentUserId || !isOnline) return
     try {
-      // Read the last time we successfully synced for this user.
-      // On first poll this will be null, so we use 24h ago as a safe default
-      // (the backend also defaults to 24h if since is missing).
       const stored = localStorage.getItem(syncKey(currentUserId))
       const since = stored ?? new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
 
@@ -48,16 +45,15 @@ export function useMessageSync(currentUserId, onNewMessages) {
 
       if (msgs.length > 0) {
         callbackRef.current(msgs)
-        // Advance the sync cursor to the newest message we just received
         const latest = msgs.reduce((max, m) =>
           new Date(m.sentAt) > new Date(max.sentAt) ? m : max
         )
-        // Add 1ms so we don't re-fetch the last message on next poll
+        
         const nextSince = new Date(new Date(latest.sentAt).getTime() + 1).toISOString()
         localStorage.setItem(syncKey(currentUserId), nextSince)
       }
     } catch {
-      // ignore transient errors — will retry next tick
+      
     }
   }, [currentUserId, isOnline])
 

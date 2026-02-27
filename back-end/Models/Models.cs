@@ -2,7 +2,9 @@ namespace ComWebApp.Models;
 
 public record User(string Id, string Username, string Email, string PasswordHash);
 
-// IsDelivered removed — no longer needed now that polling uses a timestamp
+/* I could have had these in different files, but I wanted to keep it simple for this example. 
+In a real application, I would likely want to organize these into 
+separate files and folders for better maintainability.*/
 public record Message(
     string Id,
     string SenderId,
@@ -10,16 +12,6 @@ public record Message(
     string Content,
     DateTime SentAt
 );
-
-// --- Auth DTOs ---
-public record RegisterRequest(string Username, string Email, string Password);
-public record LoginRequest(string Email, string Password);
-public record AuthResponse(string UserId, string Username, string Email);
-
-// --- User DTOs ---
-public record UserDto(string Id, string Username);
-
-// --- Message DTOs ---
 public record SendMessageRequest(
     string SenderId,
     string RecipientId,
@@ -35,3 +27,8 @@ public record MessageDto(
     string Content,
     DateTime SentAt
 );
+
+public record RegisterRequest(string Username, string Email, string Password);
+public record LoginRequest(string Email, string Password);
+public record AuthResponse(string UserId, string Username, string Email);
+public record UserDto(string Id, string Username);

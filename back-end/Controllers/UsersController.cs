@@ -1,5 +1,5 @@
+using ComWebApp.Interfaces;
 using ComWebApp.Models;
-using ComWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComWebApp.Controllers;
@@ -8,7 +8,7 @@ namespace ComWebApp.Controllers;
 [Route("users")]
 public class UsersController(IUserService userService) : ControllerBase
 {
-    /// <summary>Register a new user with username, email and password.</summary>
+    
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
@@ -27,7 +27,7 @@ public class UsersController(IUserService userService) : ControllerBase
         return Ok(new AuthResponse(user.Id, user.Username, user.Email));
     }
 
-    /// <summary>Login with email and password.</summary>
+    
     [HttpPost("login")]
     public IActionResult Login(LoginRequest request)
     {
@@ -38,11 +38,11 @@ public class UsersController(IUserService userService) : ControllerBase
         return Ok(new AuthResponse(user.Id, user.Username, user.Email));
     }
 
-    /// <summary>Logout.</summary>
+    
     [HttpPost("logout")]
     public IActionResult Logout() => NoContent();
 
-    /// <summary>Get all registered users.</summary>
+    
     [HttpGet]
     public IActionResult GetAll() => Ok(userService.GetAll());
 }
