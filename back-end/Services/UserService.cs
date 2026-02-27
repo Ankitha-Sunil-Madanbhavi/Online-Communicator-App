@@ -1,16 +1,9 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using ComWebApp.Models;
+using ComWebApp.Interfaces;
 
 namespace ComWebApp.Services;
-
-public interface IUserService
-{
-    (User? user, string? error) Register(string username, string email, string password);
-    User? Login(string email, string password);
-    User? GetById(string id);
-    IEnumerable<UserDto> GetAll();
-}
 
 public class UserService : IUserService
 {

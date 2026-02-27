@@ -1,5 +1,5 @@
+using ComWebApp.Interfaces;
 using ComWebApp.Models;
-using ComWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComWebApp.Controllers;

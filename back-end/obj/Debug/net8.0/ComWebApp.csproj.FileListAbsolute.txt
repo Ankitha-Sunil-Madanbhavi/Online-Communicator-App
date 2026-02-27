@@ -32,3 +32,4 @@ C:\Users\ANKITHA\Downloads\communicator\ComWebApp\ComWebApp\back-end\obj\Debug\n
 C:\Users\ANKITHA\Downloads\communicator\ComWebApp\ComWebApp\back-end\obj\Debug\net8.0\ComWebApp.pdb
 C:\Users\ANKITHA\Downloads\communicator\ComWebApp\ComWebApp\back-end\obj\Debug\net8.0\ComWebApp.genruntimeconfig.cache
 C:\Users\ANKITHA\Downloads\communicator\ComWebApp\ComWebApp\back-end\obj\Debug\net8.0\ref\ComWebApp.dll
+C:\Users\ANKITHA\Downloads\communicator\ComWebApp\ComWebAPP\back-end\obj\Debug\net8.0\ComWebApp.sourcelink.json
