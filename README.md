@@ -105,6 +105,28 @@ If a send fails (e.g. the backend is unreachable), the message is saved to a `lo
 Each conversation is cached in `localStorage` under a key scoped to both user IDs. When a user opens a chat, cached messages appear instantly while the fresh data loads from the server in the background.
 
 ---
+## Authentication
+
+The following authentication measures are currently implemented:
+
+**Password hashing with BCrypt**
+Passwords are never stored in plain text. When a user registers, their password is hashed using BCrypt with a default cost factor of 11 before being saved. On login, BCrypt verifies the submitted password against the stored hash. This means even if the in-memory store were somehow exposed, raw passwords would not be visible.
+
+**Email and input validation**
+On registration, the email is validated against a regex pattern to ensure it is properly formatted. The password must be at least 6 characters. The username field is required and cannot be blank. All fields are trimmed before processing to prevent whitespace-only submissions.
+
+**Unique email and username enforcement**
+The backend prevents duplicate accounts — if an email or username is already registered, the server returns a `409 Conflict` error with a clear message. Both checks happen atomically to prevent race conditions.
+
+**Session scoped to the browser tab**
+After a successful login or register, the user session is stored in `sessionStorage` (not `localStorage`). This means the session is automatically cleared when the browser tab is closed — opening the app always starts at the Sign In page. The session persists across page refreshes within the same tab.
+
+**Self-filtering from user list**
+The logged-in user is filtered out of the contacts list on the frontend so a user can never message themselves. This is enforced by comparing each user's ID against the current session's user ID.
+
+**CORS restricted to the frontend origin**
+The backend only accepts requests from `http://localhost:5173`. Any request from a different origin is rejected by the browser before it completes, preventing other websites from making API calls on behalf of a user.
+
 
 ## Further Enhancements
 
